@@ -29,11 +29,13 @@ add_definitions(-DBOOST_ALL_DYN_LINK)
 
 find_package(Boost REQUIRED COMPONENTS system log OPTIONAL_COMPONENTS unit_test_framework)
 find_package(libusb-1.0 REQUIRED)
-find_package(Qt5 COMPONENTS Multimedia MultimediaWidgets Bluetooth)
+find_package(Qt5 COMPONENTS Core Gui Widgets Multimedia Bluetooth REQUIRED)
 find_package(Protobuf REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(rtaudio REQUIRED)
 find_package(absl REQUIRED)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GST REQUIRED gstreamer-1.0 gstreamer-app-1.0)
 
 if(WIN32)
     set(WINSOCK2_LIBRARIES "ws2_32")
@@ -48,10 +50,12 @@ if(RPI3_BUILD)
 endif(RPI3_BUILD)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR}
-                    ${Qt5Multimedia_INCLUDE_DIRS}
-                    ${Qt5MultimediaWidgets_INCLUDE_DIRS}
+                    ${Qt5Core_INCLUDE_DIRS}
+                    ${Qt5Gui_INCLUDE_DIRS}
                     ${Qt5Widgets_INCLUDE_DIRS}
+                    ${Qt5Multimedia_INCLUDE_DIRS}
                     ${Qt5Bluetooth_INCLUDE_DIRS}
+                    ${GST_INCLUDE_DIRS}
                     ${Boost_INCLUDE_DIRS}
                     ${LIBUSB_1_INCLUDE_DIRS}
                     ${PROTOBUF_INCLUDE_DIR}
@@ -75,9 +79,12 @@ add_executable(autoapp ${autoapp_source_files})
 
 target_link_libraries(autoapp
                         ${Boost_LIBRARIES}
+                        ${Qt5Core_LIBRARIES}
+                        ${Qt5Gui_LIBRARIES}
+                        ${Qt5Widgets_LIBRARIES}
                         ${Qt5Multimedia_LIBRARIES}
-                        ${Qt5MultimediaWidgets_LIBRARIES}
                         ${Qt5Bluetooth_LIBRARIES}
+                        ${GST_LIBRARIES}
                         ${LIBUSB_1_LIBRARIES}
                         ${PROTOBUF_LIBRARIES}
                         ${BCM_HOST_LIBRARIES}
@@ -98,8 +105,9 @@ add_executable(btservice ${btservice_source_files})
 
 target_link_libraries(btservice
                         ${Boost_LIBRARIES}
+                        ${Qt5Core_LIBRARIES}
+                        ${Qt5Widgets_LIBRARIES}
                         ${Qt5Bluetooth_LIBRARIES}
-                        ${Qt5MultimediaWidgets_LIBRARIES}
                         ${PROTOBUF_LIBRARIES}
                         ${AASDK_PROTO_LIBRARIES})
 

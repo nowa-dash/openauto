@@ -18,13 +18,12 @@
 
 #pragma once
 
+#include <QObject>
 #include <boost/noncopyable.hpp>
+#include <gst/gst.h>
+#include <mutex>
 
-#include <QMediaPlayer>
-#include <QVideoWidget>
-#include <boost/noncopyable.hpp>
 #include <f1x/openauto/autoapp/Projection/VideoOutput.hpp>
-#include <f1x/openauto/autoapp/Projection/SequentialBuffer.hpp>
 
 namespace f1x
 {
@@ -51,14 +50,14 @@ signals:
     void stopPlayback();
 
 protected slots:
-    void createVideoOutput();
     void onStartPlayback();
     void onStopPlayback();
 
 private:
-    SequentialBuffer videoBuffer_;
-    std::unique_ptr<QVideoWidget> videoWidget_;
-    std::unique_ptr<QMediaPlayer> mediaPlayer_;
+    // Guards appsrc_/pipeline_ against concurrent access from the asio thread (write) and the Qt thread
+    std::mutex gstMutex_;
+    GstElement* pipeline_ = nullptr;
+    GstElement* appsrc_ = nullptr;
 };
 
 }
