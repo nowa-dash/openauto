@@ -189,25 +189,6 @@ color: rgb(238, 238, 236);</string>
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;AndroidAuto is registered trademark of Google Inc.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButtonToggleCursor">
-    <property name="geometry">
-     <rect>
-      <x>630</x>
-      <y>230</y>
-      <width>161</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Toggle cursor</string>
-    </property>
-    <property name="autoDefault">
-     <bool>false</bool>
-    </property>
-    <property name="default">
-     <bool>false</bool>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButtonWirelessConnection">
     <property name="geometry">
      <rect>
@@ -246,7 +227,6 @@ color: rgb(238, 238, 236);</string>
   </widget>
  </widget>
  <tabstops>
-  <tabstop>pushButtonToggleCursor</tabstop>
   <tabstop>pushButtonWirelessConnection</tabstop>
   <tabstop>pushButtonSettings</tabstop>
   <tabstop>pushButtonExit</tabstop>
