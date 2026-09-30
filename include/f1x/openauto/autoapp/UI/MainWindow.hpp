@@ -21,6 +21,8 @@
 #include <memory>
 #include <QMainWindow>
 
+class QCloseEvent;
+
 namespace Ui
 {
 class MainWindow;
@@ -46,6 +48,9 @@ signals:
     void exit();
     void openSettings();
     void openConnectDialog();
+
+protected:
+    void closeEvent(QCloseEvent*) override;
 
 private:
     Ui::MainWindow* ui_;

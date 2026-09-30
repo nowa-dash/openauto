@@ -17,6 +17,7 @@
 */
 
 #include <QApplication>
+#include <QCloseEvent>
 #include <f1x/openauto/autoapp/UI/MainWindow.hpp>
 #include "ui_mainwindow.h"
 
@@ -42,6 +43,11 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui_;
+}
+
+void MainWindow::closeEvent(QCloseEvent*)
+{
+    emit exit();
 }
 
 }
