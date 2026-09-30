@@ -21,13 +21,7 @@
 #include <f1x/openauto/autoapp/Service/IServiceFactory.hpp>
 #include <f1x/openauto/autoapp/Configuration/IConfiguration.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace service
+namespace f1x::openauto::autoapp::service
 {
 
 class ServiceFactory: public IServiceFactory
@@ -46,7 +40,4 @@ private:
     configuration::IConfiguration::Pointer configuration_;
 };
 
-}
-}
-}
 }

@@ -19,11 +19,7 @@
 #include <f1x/openauto/Common/Log.hpp>
 #include <f1x/openauto/btservice/AndroidBluetoothServer.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace btservice
+namespace f1x::openauto::btservice
 {
 
 AndroidBluetoothServer::AndroidBluetoothServer()
@@ -51,6 +47,4 @@ void AndroidBluetoothServer::onClientConnected()
     }
 }
 
-}
-}
 }

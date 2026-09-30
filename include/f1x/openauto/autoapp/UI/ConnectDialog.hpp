@@ -10,13 +10,7 @@ namespace Ui {
 class ConnectDialog;
 }
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace ui
+namespace f1x::openauto::autoapp::ui
 {
 
 class ConnectDialog : public QDialog
@@ -51,7 +45,4 @@ private:
     QStringListModel recentAddressesModel_;
 };
 
-}
-}
-}
 }

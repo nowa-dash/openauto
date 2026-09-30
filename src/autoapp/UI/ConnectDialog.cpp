@@ -2,13 +2,7 @@
 #include <f1x/openauto/autoapp/UI/ConnectDialog.hpp>
 #include "ui_connectdialog.h"
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace ui
+namespace f1x::openauto::autoapp::ui
 {
 
 ConnectDialog::ConnectDialog(boost::asio::io_context& ioService, aasdk::tcp::ITCPWrapper& tcpWrapper, openauto::autoapp::configuration::IRecentAddressesList& recentAddressesList, QWidget *parent)
@@ -119,7 +113,4 @@ void ConnectDialog::insertIpAddress(const std::string& ipAddress)
     this->loadRecentList();
 }
 
-}
-}
-}
 }

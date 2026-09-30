@@ -40,13 +40,7 @@
 #include <f1x/openauto/autoapp/Projection/RemoteBluetoothDevice.hpp>
 #include <f1x/openauto/autoapp/Projection/DummyBluetoothDevice.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace service
+namespace f1x::openauto::autoapp::service
 {
 
 ServiceFactory::ServiceFactory(boost::asio::io_context& ioService, configuration::IConfiguration::Pointer configuration)
@@ -154,7 +148,4 @@ void ServiceFactory::createAudioServices(ServiceList& serviceList, aasdk::messen
     serviceList.emplace_back(std::make_shared<SystemAudioService>(ioService_, messenger, std::move(systemAudioOutput)));
 }
 
-}
-}
-}
 }

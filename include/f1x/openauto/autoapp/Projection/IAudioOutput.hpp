@@ -22,13 +22,7 @@
 #include <f1x/aasdk/Messenger/Timestamp.hpp>
 #include <f1x/aasdk/Common/Data.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace projection
+namespace f1x::openauto::autoapp::projection
 {
 
 class IAudioOutput
@@ -49,7 +43,4 @@ public:
     virtual uint32_t getSampleRate() const = 0;
 };
 
-}
-}
-}
 }

@@ -21,13 +21,7 @@
 #include <memory>
 #include <f1x/openauto/autoapp/Service/IAndroidAutoEntityEventHandler.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace service
+namespace f1x::openauto::autoapp::service
 {
 
 class IAndroidAutoEntity
@@ -41,7 +35,4 @@ public:
     virtual void stop() = 0;
 };
 
-}
-}
-}
 }

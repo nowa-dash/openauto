@@ -23,13 +23,7 @@
 #include <QAudioFormat>
 #include <f1x/openauto/autoapp/Projection/IAudioInput.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace projection
+namespace f1x::openauto::autoapp::projection
 {
 
 class QtAudioInput: public QObject, public IAudioInput
@@ -67,7 +61,4 @@ private:
     static constexpr size_t cSampleSize = 2056;
 };
 
-}
-}
-}
 }

@@ -19,13 +19,7 @@
 #include <f1x/aasdk/Channel/AV/SystemAudioServiceChannel.hpp>
 #include <f1x/openauto/autoapp/Service/SystemAudioService.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace service
+namespace f1x::openauto::autoapp::service
 {
 
 SystemAudioService::SystemAudioService(boost::asio::io_context& ioService, aasdk::messenger::IMessenger::Pointer messenger, projection::IAudioOutput::Pointer audioOutput)
@@ -34,7 +28,4 @@ SystemAudioService::SystemAudioService(boost::asio::io_context& ioService, aasdk
 
 }
 
-}
-}
-}
 }

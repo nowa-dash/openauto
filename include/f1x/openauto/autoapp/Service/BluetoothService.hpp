@@ -22,13 +22,7 @@
 #include <f1x/openauto/autoapp/Projection/IBluetoothDevice.hpp>
 #include <f1x/openauto/autoapp/Service/IService.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace service
+namespace f1x::openauto::autoapp::service
 {
 
 class BluetoothService: public aasdk::channel::bluetooth::IBluetoothServiceChannelEventHandler, public IService, public std::enable_shared_from_this<BluetoothService>
@@ -50,7 +44,4 @@ private:
     projection::IBluetoothDevice::Pointer bluetoothDevice_;
 };
 
-}
-}
-}
 }

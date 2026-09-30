@@ -20,13 +20,7 @@
 
 #include <f1x/openauto/autoapp/Service/IPinger.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace service
+namespace f1x::openauto::autoapp::service
 {
 
 class Pinger: public IPinger, public std::enable_shared_from_this<Pinger>
@@ -52,7 +46,4 @@ private:
     int64_t pongsCount_;
 };
 
-}
-}
-}
 }

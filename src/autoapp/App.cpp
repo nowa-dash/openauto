@@ -22,11 +22,7 @@
 #include <f1x/openauto/autoapp/App.hpp>
 #include <f1x/openauto/Common/Log.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
+namespace f1x::openauto::autoapp
 {
 
 App::App(boost::asio::io_context& ioService, aasdk::usb::USBWrapper& usbWrapper, aasdk::tcp::ITCPWrapper& tcpWrapper, service::IAndroidAutoEntityFactory& androidAutoEntityFactory,
@@ -171,6 +167,4 @@ void App::onUSBHubError(const aasdk::error::Error& error)
     }
 }
 
-}
-}
 }

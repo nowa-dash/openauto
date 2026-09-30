@@ -23,13 +23,7 @@
 #include <f1x/openauto/autoapp/Projection/IAudioOutput.hpp>
 #include <f1x/openauto/autoapp/Projection/SequentialBuffer.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace projection
+namespace f1x::openauto::autoapp::projection
 {
 
 class QtAudioOutput: public QObject, public IAudioOutput
@@ -65,7 +59,4 @@ private:
     bool playbackStarted_;
 };
 
-}
-}
-}
 }

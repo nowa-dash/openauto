@@ -21,13 +21,7 @@
 
 #pragma once
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace projection
+namespace f1x::openauto::autoapp::projection
 {
 
 class LocalBluetoothDevice: public QObject, public IBluetoothDevice
@@ -62,7 +56,4 @@ private:
     QBluetoothAddress pairingAddress_;
 };
 
-}
-}
-}
 }

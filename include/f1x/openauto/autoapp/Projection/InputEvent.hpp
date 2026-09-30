@@ -22,13 +22,7 @@
 #include <aasdk_proto/TouchActionEnum.pb.h>
 #include <f1x/aasdk/IO/Promise.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace projection
+namespace f1x::openauto::autoapp::projection
 {
 
 enum class ButtonEventType
@@ -60,7 +54,4 @@ struct TouchEvent
     uint32_t pointerId;
 };
 
-}
-}
-}
 }

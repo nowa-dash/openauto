@@ -20,13 +20,7 @@
 #include <f1x/openauto/Common/Log.hpp>
 #include <f1x/openauto/autoapp/Service/AudioInputService.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace service
+namespace f1x::openauto::autoapp::service
 {
 
 AudioInputService::AudioInputService(boost::asio::io_context& ioService, aasdk::messenger::IMessenger::Pointer messenger, projection::IAudioInput::Pointer audioInput)
@@ -195,7 +189,4 @@ void AudioInputService::readAudioInput()
     }
 }
 
-}
-}
-}
 }

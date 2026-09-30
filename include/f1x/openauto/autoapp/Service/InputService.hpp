@@ -24,13 +24,7 @@
 #include <f1x/openauto/autoapp/Projection/IInputDevice.hpp>
 #include <f1x/openauto/autoapp/Projection/IInputDeviceEventHandler.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace service
+namespace f1x::openauto::autoapp::service
 {
 
 class InputService:
@@ -59,7 +53,4 @@ private:
     projection::IInputDevice::Pointer inputDevice_;
 };
 
-}
-}
-}
 }

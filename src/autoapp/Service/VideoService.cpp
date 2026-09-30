@@ -19,13 +19,7 @@
 #include <f1x/openauto/Common/Log.hpp>
 #include <f1x/openauto/autoapp/Service/VideoService.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace service
+namespace f1x::openauto::autoapp::service
 {
 
 VideoService::VideoService(boost::asio::io_context& ioService, aasdk::messenger::IMessenger::Pointer messenger, projection::IVideoOutput::Pointer videoOutput)
@@ -181,7 +175,4 @@ void VideoService::sendVideoFocusIndication()
     channel_->sendVideoFocusIndication(videoFocusIndication, std::move(promise));
 }
 
-}
-}
-}
 }

@@ -19,13 +19,7 @@
 #include <f1x/openauto/autoapp/Configuration/Configuration.hpp>
 #include <f1x/openauto/Common/Log.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace configuration
+namespace f1x::openauto::autoapp::configuration
 {
 
 const std::string Configuration::cConfigFileName = "openauto.ini";
@@ -344,7 +338,4 @@ void Configuration::writeButtonCodes(boost::property_tree::ptree& iniConfig)
     iniConfig.put<bool>(cInputEnterButtonKey, std::find(buttonCodes_.begin(), buttonCodes_.end(), aasdk::proto::enums::ButtonCode::ENTER) != buttonCodes_.end());
 }
 
-}
-}
-}
 }

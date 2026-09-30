@@ -18,13 +18,7 @@
 
 #include <f1x/openauto/autoapp/Projection/SequentialBuffer.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace projection
+namespace f1x::openauto::autoapp::projection
 {
 
 SequentialBuffer::SequentialBuffer()
@@ -108,7 +102,4 @@ bool SequentialBuffer::canReadLine() const
     return true;
 }
 
-}
-}
-}
 }

@@ -28,13 +28,7 @@ namespace Ui
 class MainWindow;
 }
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace ui
+namespace f1x::openauto::autoapp::ui
 {
 
 class MainWindow : public QMainWindow
@@ -56,7 +50,4 @@ private:
     Ui::MainWindow* ui_;
 };
 
-}
-}
-}
 }

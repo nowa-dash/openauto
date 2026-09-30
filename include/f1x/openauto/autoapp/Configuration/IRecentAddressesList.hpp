@@ -21,13 +21,7 @@
 #include <deque>
 #include <string>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace configuration
+namespace f1x::openauto::autoapp::configuration
 {
 
 class IRecentAddressesList
@@ -40,7 +34,4 @@ public:
     virtual RecentAddresses getList() const = 0;
 };
 
-}
-}
-}
 }

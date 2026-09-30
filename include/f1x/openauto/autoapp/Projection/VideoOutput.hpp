@@ -21,13 +21,7 @@
 #include <f1x/openauto/autoapp/Configuration/IConfiguration.hpp>
 #include <f1x/openauto/autoapp/Projection/IVideoOutput.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace projection
+namespace f1x::openauto::autoapp::projection
 {
 
 class VideoOutput: public IVideoOutput
@@ -44,7 +38,4 @@ protected:
     configuration::IConfiguration::Pointer configuration_;
 };
 
-}
-}
-}
 }

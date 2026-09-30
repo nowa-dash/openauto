@@ -21,13 +21,7 @@
 #include <boost/property_tree/ini_parser.hpp>
 #include <f1x/openauto/autoapp/Configuration/IConfiguration.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace configuration
+namespace f1x::openauto::autoapp::configuration
 {
 
 class Configuration: public IConfiguration
@@ -130,7 +124,4 @@ private:
     static const std::string cInputEnterButtonKey;
 };
 
-}
-}
-}
 }

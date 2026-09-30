@@ -19,13 +19,7 @@
 #include <f1x/openauto/Common/Log.hpp>
 #include <f1x/openauto/autoapp/Service/AudioService.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace service
+namespace f1x::openauto::autoapp::service
 {
 
 AudioService::AudioService(boost::asio::io_context& ioService, aasdk::channel::av::IAudioServiceChannel::Pointer channel, projection::IAudioOutput::Pointer audioOutput)
@@ -176,7 +170,4 @@ void AudioService::onChannelError(const aasdk::error::Error& e)
                         << ", channel: " << aasdk::messenger::channelIdToString(channel_->getId());
 }
 
-}
-}
-}
 }

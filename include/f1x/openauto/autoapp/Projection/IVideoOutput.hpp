@@ -24,13 +24,7 @@
 #include <aasdk_proto/VideoResolutionEnum.pb.h>
 #include <f1x/aasdk/Common/Data.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace projection
+namespace f1x::openauto::autoapp::projection
 {
 
 class IVideoOutput
@@ -51,7 +45,4 @@ public:
     virtual QRect getVideoMargins() const = 0;
 };
 
-}
-}
-}
 }

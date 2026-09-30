@@ -23,11 +23,7 @@
 #include <QBluetoothServer>
 #include <f1x/openauto/btservice/IAndroidBluetoothServer.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace btservice
+namespace f1x::openauto::btservice
 {
 
 class AndroidBluetoothServer: public QObject, public IAndroidBluetoothServer
@@ -46,6 +42,4 @@ private:
     std::unique_ptr<QBluetoothServer> rfcommServer_;
 };
 
-}
-}
 }

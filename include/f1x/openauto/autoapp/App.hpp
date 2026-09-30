@@ -26,11 +26,7 @@
 #include <f1x/openauto/autoapp/Service/IAndroidAutoEntityEventHandler.hpp>
 #include <f1x/openauto/autoapp/Service/IAndroidAutoEntityFactory.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
+namespace f1x::openauto::autoapp
 {
 
 class App: public service::IAndroidAutoEntityEventHandler, public std::enable_shared_from_this<App>
@@ -64,6 +60,4 @@ private:
     bool isStopped_;
 };
 
-}
-}
 }

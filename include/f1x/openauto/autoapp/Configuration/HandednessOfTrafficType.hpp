@@ -18,13 +18,7 @@
 
 #pragma once
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace configuration
+namespace f1x::openauto::autoapp::configuration
 {
 
 enum class HandednessOfTrafficType
@@ -33,7 +27,4 @@ enum class HandednessOfTrafficType
     RIGHT_HAND_DRIVE
 };
 
-}
-}
-}
 }

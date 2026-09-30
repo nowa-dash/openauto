@@ -19,13 +19,7 @@
 #include <f1x/openauto/Common/Log.hpp>
 #include <f1x/openauto/autoapp/Service/BluetoothService.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace service
+namespace f1x::openauto::autoapp::service
 {
 
 BluetoothService::BluetoothService(boost::asio::io_context& ioService, aasdk::messenger::IMessenger::Pointer messenger, projection::IBluetoothDevice::Pointer bluetoothDevice)
@@ -105,7 +99,4 @@ void BluetoothService::onChannelError(const aasdk::error::Error& e)
     OPENAUTO_LOG(error) << "[BluetoothService] channel error: " << e.what();
 }
 
-}
-}
-}
 }

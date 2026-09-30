@@ -20,13 +20,7 @@
 #include <f1x/openauto/autoapp/Service/AndroidAutoEntity.hpp>
 #include <f1x/openauto/Common/Log.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace service
+namespace f1x::openauto::autoapp::service
 {
 
 AndroidAutoEntity::AndroidAutoEntity(boost::asio::io_context& ioService,
@@ -275,7 +269,4 @@ void AndroidAutoEntity::sendPing()
     controlServiceChannel_->sendPingRequest(request, std::move(promise));
 }
 
-}
-}
-}
 }

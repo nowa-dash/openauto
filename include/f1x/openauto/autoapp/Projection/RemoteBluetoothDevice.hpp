@@ -20,13 +20,7 @@
 
 #include <f1x/openauto/autoapp/Projection/IBluetoothDevice.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace projection
+namespace f1x::openauto::autoapp::projection
 {
 
 class RemoteBluetoothDevice: public IBluetoothDevice
@@ -44,7 +38,4 @@ private:
     std::string address_;
 };
 
-}
-}
-}
 }

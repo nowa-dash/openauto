@@ -20,13 +20,7 @@
 
 #include <f1x/aasdk/Error/Error.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace service
+namespace f1x::openauto::autoapp::service
 {
 
 class IAndroidAutoEntityEventHandler
@@ -36,7 +30,4 @@ public:
     virtual void onAndroidAutoQuit() = 0;
 };
 
-}
-}
-}
 }

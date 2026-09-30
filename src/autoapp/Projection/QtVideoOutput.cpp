@@ -23,13 +23,7 @@
 #include <f1x/openauto/autoapp/Projection/QtVideoOutput.hpp>
 #include <f1x/openauto/Common/Log.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace projection
+namespace f1x::openauto::autoapp::projection
 {
 
 namespace
@@ -231,7 +225,4 @@ void QtVideoOutput::onStopPlayback()
     }
 }
 
-}
-}
-}
 }

@@ -20,13 +20,7 @@
 #include <f1x/openauto/Common/Log.hpp>
 #include <f1x/openauto/autoapp/Service/SensorService.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace service
+namespace f1x::openauto::autoapp::service
 {
 
 SensorService::SensorService(boost::asio::io_context& ioService, aasdk::messenger::IMessenger::Pointer messenger)
@@ -133,7 +127,4 @@ void SensorService::onChannelError(const aasdk::error::Error& e)
     OPENAUTO_LOG(error) << "[SensorService] channel error: " << e.what();
 }
 
-}
-}
-}
 }

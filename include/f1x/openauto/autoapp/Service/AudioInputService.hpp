@@ -22,13 +22,7 @@
 #include <f1x/openauto/autoapp/Service/IService.hpp>
 #include <f1x/openauto/autoapp/Projection/IAudioInput.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace service
+namespace f1x::openauto::autoapp::service
 {
 
 class AudioInputService: public aasdk::channel::av::IAVInputServiceChannelEventHandler, public IService, public std::enable_shared_from_this<AudioInputService>
@@ -59,7 +53,4 @@ private:
     int32_t session_;
 };
 
-}
-}
-}
 }

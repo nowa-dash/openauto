@@ -22,13 +22,7 @@
 #include <f1x/aasdk/USB/IAOAPDevice.hpp>
 #include <f1x/openauto/autoapp/Service/IAndroidAutoEntity.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace service
+namespace f1x::openauto::autoapp::service
 {
 
 class IAndroidAutoEntityFactory
@@ -40,7 +34,4 @@ public:
     virtual IAndroidAutoEntity::Pointer create(aasdk::tcp::ITCPEndpoint::Pointer tcpEndpoint) = 0;
 };
 
-}
-}
-}
 }

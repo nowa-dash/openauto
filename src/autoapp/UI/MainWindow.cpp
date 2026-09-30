@@ -21,13 +21,7 @@
 #include <f1x/openauto/autoapp/UI/MainWindow.hpp>
 #include "ui_mainwindow.h"
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace ui
+namespace f1x::openauto::autoapp::ui
 {
 
 MainWindow::MainWindow(QWidget *parent)
@@ -50,7 +44,4 @@ void MainWindow::closeEvent(QCloseEvent*)
     emit exit();
 }
 
-}
-}
-}
 }

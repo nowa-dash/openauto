@@ -18,13 +18,7 @@
 
 #include <f1x/openauto/autoapp/Service/Pinger.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace service
+namespace f1x::openauto::autoapp::service
 {
 
 Pinger::Pinger(boost::asio::io_context& ioService, time_t duration)
@@ -95,7 +89,4 @@ void Pinger::cancel()
     });
 }
 
-}
-}
-}
 }

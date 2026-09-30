@@ -21,13 +21,7 @@
 #include <f1x/aasdk/Channel/Sensor/SensorServiceChannel.hpp>
 #include <f1x/openauto/autoapp/Service/IService.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace service
+namespace f1x::openauto::autoapp::service
 {
 
 class SensorService: public aasdk::channel::sensor::ISensorServiceChannelEventHandler, public IService, public std::enable_shared_from_this<SensorService>
@@ -51,7 +45,4 @@ private:
     aasdk::channel::sensor::SensorServiceChannel::Pointer channel_;
 };
 
-}
-}
-}
 }

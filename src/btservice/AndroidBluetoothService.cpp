@@ -18,11 +18,7 @@
 
 #include <f1x/openauto/btservice/AndroidBluetoothService.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace btservice
+namespace f1x::openauto::btservice
 {
 
 AndroidBluetoothService::AndroidBluetoothService(uint16_t portNumber)
@@ -66,6 +62,4 @@ bool AndroidBluetoothService::unregisterService()
     return serviceInfo_.unregisterService();
 }
 
-}
-}
 }

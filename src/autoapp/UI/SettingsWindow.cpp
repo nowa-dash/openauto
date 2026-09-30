@@ -20,13 +20,7 @@
 #include <f1x/openauto/autoapp/UI/SettingsWindow.hpp>
 #include "ui_settingswindow.h"
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace ui
+namespace f1x::openauto::autoapp::ui
 {
 
 SettingsWindow::SettingsWindow(configuration::IConfiguration::Pointer configuration, QWidget *parent)
@@ -257,7 +251,4 @@ void SettingsWindow::onShowBindings()
     confirmationMessage.exec();
 }
 
-}
-}
-}
 }

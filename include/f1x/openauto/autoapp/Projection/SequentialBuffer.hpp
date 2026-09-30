@@ -23,13 +23,7 @@
 #include <boost/circular_buffer.hpp>
 #include <f1x/aasdk/Common/Data.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace projection
+namespace f1x::openauto::autoapp::projection
 {
 
 class SequentialBuffer: public QIODevice
@@ -55,7 +49,4 @@ private:
     mutable std::mutex mutex_;
 };
 
-}
-}
-}
 }

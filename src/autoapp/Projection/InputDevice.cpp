@@ -20,13 +20,7 @@
 #include <f1x/openauto/autoapp/Projection/IInputDeviceEventHandler.hpp>
 #include <f1x/openauto/autoapp/Projection/InputDevice.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace projection
+namespace f1x::openauto::autoapp::projection
 {
 
 InputDevice::InputDevice(QObject& parent, configuration::IConfiguration::Pointer configuration, const QRect& touchscreenGeometry, const QRect& displayGeometry)
@@ -230,7 +224,4 @@ IInputDevice::ButtonCodes InputDevice::getSupportedButtonCodes() const
     return configuration_->getButtonCodes();
 }
 
-}
-}
-}
 }

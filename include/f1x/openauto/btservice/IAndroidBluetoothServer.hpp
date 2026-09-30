@@ -20,11 +20,7 @@
 
 #include <QBluetoothAddress>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace btservice
+namespace f1x::openauto::btservice
 {
 
 class IAndroidBluetoothServer
@@ -35,6 +31,4 @@ public:
     virtual bool start(const QBluetoothAddress& address, uint16_t portNumber) = 0;
 };
 
-}
-}
 }

@@ -22,13 +22,7 @@
 #include <memory>
 #include <aasdk_proto/ServiceDiscoveryResponseMessage.pb.h>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace service
+namespace f1x::openauto::autoapp::service
 {
 
 class IService
@@ -45,7 +39,4 @@ public:
 
 typedef std::vector<IService::Pointer> ServiceList;
 
-}
-}
-}
 }

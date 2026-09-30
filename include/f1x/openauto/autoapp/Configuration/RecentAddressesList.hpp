@@ -21,13 +21,7 @@
 #include <deque>
 #include <f1x/openauto/autoapp/Configuration/IRecentAddressesList.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace configuration
+namespace f1x::openauto::autoapp::configuration
 {
 
 class RecentAddressesList: public IRecentAddressesList
@@ -51,7 +45,4 @@ private:
     static const std::string cRecentEntryPrefix;
 };
 
-}
-}
-}
 }

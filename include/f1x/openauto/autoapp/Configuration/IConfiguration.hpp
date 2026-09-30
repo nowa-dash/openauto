@@ -27,13 +27,7 @@
 #include <f1x/openauto/autoapp/Configuration/HandednessOfTrafficType.hpp>
 #include <f1x/openauto/autoapp/Configuration/AudioOutputBackendType.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace configuration
+namespace f1x::openauto::autoapp::configuration
 {
 
 class IConfiguration
@@ -82,7 +76,4 @@ public:
     virtual void setAudioOutputBackendType(AudioOutputBackendType value) = 0;
 };
 
-}
-}
-}
 }

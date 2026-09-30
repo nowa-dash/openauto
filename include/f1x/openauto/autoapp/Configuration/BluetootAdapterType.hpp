@@ -18,13 +18,7 @@
 
 #pragma once
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace configuration
+namespace f1x::openauto::autoapp::configuration
 {
 
 enum class BluetoothAdapterType
@@ -34,7 +28,4 @@ enum class BluetoothAdapterType
     REMOTE
 };
 
-}
-}
-}
 }

@@ -18,13 +18,7 @@
 
 #include <f1x/openauto/autoapp/Projection/RemoteBluetoothDevice.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace projection
+namespace f1x::openauto::autoapp::projection
 {
 
 RemoteBluetoothDevice::RemoteBluetoothDevice(const std::string& address)
@@ -58,7 +52,4 @@ bool RemoteBluetoothDevice::isAvailable() const
     return true;
 }
 
-}
-}
-}
 }

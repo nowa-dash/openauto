@@ -24,13 +24,7 @@
 #include <f1x/openauto/autoapp/Service/IAndroidAutoEntityFactory.hpp>
 #include <f1x/openauto/autoapp/Service/IServiceFactory.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace service
+namespace f1x::openauto::autoapp::service
 {
 
 class AndroidAutoEntityFactory: public IAndroidAutoEntityFactory
@@ -51,7 +45,4 @@ private:
     IServiceFactory& serviceFactory_;
 };
 
-}
-}
-}
 }

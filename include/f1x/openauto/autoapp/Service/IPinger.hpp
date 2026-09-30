@@ -20,13 +20,7 @@
 
 #include <f1x/aasdk/IO/Promise.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace service
+namespace f1x::openauto::autoapp::service
 {
 
 class IPinger
@@ -41,7 +35,4 @@ public:
     virtual void cancel() = 0;
 };
 
-}
-}
-}
 }

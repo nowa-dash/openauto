@@ -25,13 +25,7 @@
 #include <f1x/openauto/autoapp/Projection/IInputDevice.hpp>
 #include <f1x/openauto/autoapp/Configuration/IConfiguration.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace projection
+namespace f1x::openauto::autoapp::projection
 {
 
 class InputDevice: public QObject, public IInputDevice, boost::noncopyable
@@ -62,7 +56,4 @@ private:
     std::mutex mutex_;
 };
 
-}
-}
-}
 }

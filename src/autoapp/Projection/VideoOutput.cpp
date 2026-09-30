@@ -18,13 +18,7 @@
 
 #include <f1x/openauto/autoapp/Projection/VideoOutput.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace projection
+namespace f1x::openauto::autoapp::projection
 {
 
 VideoOutput::VideoOutput(configuration::IConfiguration::Pointer configuration)
@@ -53,7 +47,4 @@ QRect VideoOutput::getVideoMargins() const
     return configuration_->getVideoMargins();
 }
 
-}
-}
-}
 }

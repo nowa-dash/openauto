@@ -22,13 +22,7 @@
 #include <f1x/aasdk/IO/Promise.hpp>
 #include <f1x/openauto/autoapp/Projection/InputEvent.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace projection
+namespace f1x::openauto::autoapp::projection
 {
 
 class IInputDeviceEventHandler;
@@ -47,7 +41,4 @@ public:
     virtual QRect getTouchscreenGeometry() const = 0;
 };
 
-}
-}
-}
 }

@@ -25,13 +25,7 @@
 
 #include <f1x/openauto/autoapp/Projection/VideoOutput.hpp>
 
-namespace f1x
-{
-namespace openauto
-{
-namespace autoapp
-{
-namespace projection
+namespace f1x::openauto::autoapp::projection
 {
 
 class QtVideoOutput: public QObject, public VideoOutput, boost::noncopyable
@@ -60,7 +54,4 @@ private:
     GstElement* appsrc_ = nullptr;
 };
 
-}
-}
-}
 }
