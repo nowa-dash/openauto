@@ -32,9 +32,6 @@ SettingsWindow::SettingsWindow(configuration::IConfiguration::Pointer configurat
     connect(ui_->pushButtonCancel, &QPushButton::clicked, this, &SettingsWindow::close);
     connect(ui_->pushButtonSave, &QPushButton::clicked, this, &SettingsWindow::onSave);
     connect(ui_->horizontalSliderScreenDPI, &QSlider::valueChanged, this, &SettingsWindow::onUpdateScreenDPI);
-    connect(ui_->radioButtonUseExternalBluetoothAdapter, &QRadioButton::clicked, [&](bool checked) { ui_->lineEditExternalBluetoothAdapterAddress->setEnabled(checked); });
-    connect(ui_->radioButtonDisableBluetooth, &QRadioButton::clicked, [&]() { ui_->lineEditExternalBluetoothAdapterAddress->setEnabled(false); });
-    connect(ui_->radioButtonUseLocalBluetoothAdapter, &QRadioButton::clicked, [&]() { ui_->lineEditExternalBluetoothAdapterAddress->setEnabled(false); });
     connect(ui_->pushButtonClearSelection, &QPushButton::clicked, std::bind(&SettingsWindow::setButtonCheckBoxes, this, false));
     connect(ui_->pushButtonSelectAll, &QPushButton::clicked, std::bind(&SettingsWindow::setButtonCheckBoxes, this, true));
     connect(ui_->pushButtonResetToDefaults, &QPushButton::clicked, this, &SettingsWindow::onResetToDefaults);
@@ -73,21 +70,6 @@ void SettingsWindow::onSave()
 
     configuration_->setTouchscreenEnabled(ui_->checkBoxEnableTouchscreen->isChecked());
     this->saveButtonCheckBoxes();
-
-    if(ui_->radioButtonDisableBluetooth->isChecked())
-    {
-        configuration_->setBluetoothAdapterType(configuration::BluetoothAdapterType::NONE);
-    }
-    else if(ui_->radioButtonUseLocalBluetoothAdapter->isChecked())
-    {
-        configuration_->setBluetoothAdapterType(configuration::BluetoothAdapterType::LOCAL);
-    }
-    else if(ui_->radioButtonUseExternalBluetoothAdapter->isChecked())
-    {
-        configuration_->setBluetoothAdapterType(configuration::BluetoothAdapterType::REMOTE);
-    }
-
-    configuration_->setBluetoothRemoteAdapterAddress(ui_->lineEditExternalBluetoothAdapterAddress->text().toStdString());
 
     configuration_->setMusicAudioChannelEnabled(ui_->checkBoxMusicAudioChannel->isChecked());
     configuration_->setSpeechAudioChannelEnabled(ui_->checkBoxSpeechAudioChannel->isChecked());
@@ -135,12 +117,6 @@ void SettingsWindow::load()
 
     ui_->checkBoxEnableTouchscreen->setChecked(configuration_->getTouchscreenEnabled());
     this->loadButtonCheckBoxes();
-
-    ui_->radioButtonDisableBluetooth->setChecked(configuration_->getBluetoothAdapterType() == configuration::BluetoothAdapterType::NONE);
-    ui_->radioButtonUseLocalBluetoothAdapter->setChecked(configuration_->getBluetoothAdapterType() == configuration::BluetoothAdapterType::LOCAL);
-    ui_->radioButtonUseExternalBluetoothAdapter->setChecked(configuration_->getBluetoothAdapterType() == configuration::BluetoothAdapterType::REMOTE);
-    ui_->lineEditExternalBluetoothAdapterAddress->setEnabled(configuration_->getBluetoothAdapterType() == configuration::BluetoothAdapterType::REMOTE);
-    ui_->lineEditExternalBluetoothAdapterAddress->setText(QString::fromStdString(configuration_->getBluetoothRemoteAdapterAddress()));
 
     ui_->checkBoxMusicAudioChannel->setChecked(configuration_->musicAudioChannelEnabled());
     ui_->checkBoxSpeechAudioChannel->setChecked(configuration_->speechAudioChannelEnabled());

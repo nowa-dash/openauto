@@ -29,7 +29,7 @@ add_definitions(-DBOOST_ALL_DYN_LINK)
 
 find_package(Boost REQUIRED COMPONENTS system log OPTIONAL_COMPONENTS unit_test_framework)
 find_package(libusb-1.0 REQUIRED)
-find_package(Qt5 COMPONENTS Core Gui Widgets Multimedia Bluetooth REQUIRED)
+find_package(Qt5 COMPONENTS Core Gui Widgets Multimedia REQUIRED)
 find_package(rtaudio REQUIRED)
 find_package(absl REQUIRED)
 find_package(PkgConfig REQUIRED)
@@ -53,7 +53,6 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR}
                     ${Qt5Gui_INCLUDE_DIRS}
                     ${Qt5Widgets_INCLUDE_DIRS}
                     ${Qt5Multimedia_INCLUDE_DIRS}
-                    ${Qt5Bluetooth_INCLUDE_DIRS}
                     ${GST_INCLUDE_DIRS}
                     ${Boost_INCLUDE_DIRS}
                     ${LIBUSB_1_INCLUDE_DIRS}
@@ -78,7 +77,6 @@ target_link_libraries(autoapp
                         ${Qt5Gui_LIBRARIES}
                         ${Qt5Widgets_LIBRARIES}
                         ${Qt5Multimedia_LIBRARIES}
-                        ${Qt5Bluetooth_LIBRARIES}
                         ${GST_LIBRARIES}
                         ${LIBUSB_1_LIBRARIES}
                         ${BCM_HOST_LIBRARIES}

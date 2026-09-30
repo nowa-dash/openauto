@@ -285,7 +285,7 @@ color: rgb(238, 238, 236);</string>
        <string>Layer index:</string>
       </property>
      </widget>
-     <widget class="QLabel" name="labelBluetoothAddressFormatInfo_2">
+     <widget class="QLabel" name="labelOmxLayerInfo_2">
       <property name="geometry">
        <rect>
         <x>60</x>
@@ -298,7 +298,7 @@ color: rgb(238, 238, 236);</string>
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-style:italic;&quot;&gt;OMX Layer is used only in case of OMX video output.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
-     <widget class="QLabel" name="labelBluetoothAddressFormatInfoIcon_2">
+     <widget class="QLabel" name="labelOmxLayerInfoIcon_2">
       <property name="geometry">
        <rect>
         <x>30</x>
@@ -826,138 +826,6 @@ color: rgb(238, 238, 236);</string>
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="tabBluetooth">
-    <attribute name="title">
-     <string>Bluetooth</string>
-    </attribute>
-    <widget class="QGroupBox" name="groupBoxBluetoothAdapter">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>10</y>
-       <width>621</width>
-       <height>441</height>
-      </rect>
-     </property>
-     <property name="title">
-      <string>Bluetooth adapter</string>
-     </property>
-     <widget class="QRadioButton" name="radioButtonDisableBluetooth">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>30</y>
-        <width>171</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Disable bluetooth</string>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="radioButtonUseExternalBluetoothAdapter">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>90</y>
-        <width>171</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Use external adapter</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditExternalBluetoothAdapterAddress">
-      <property name="geometry">
-       <rect>
-        <x>130</x>
-        <y>120</y>
-        <width>231</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelBluetoothAdapterAddress">
-      <property name="geometry">
-       <rect>
-        <x>60</x>
-        <y>120</y>
-        <width>67</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Address:</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelBluetoothAddressFormatInfo">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>160</y>
-        <width>271</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-style:italic; color:#babdb6;&quot;&gt;Provide address in format AA:BB:CC:DD:EE:FF.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelBluetoothAddressFormatInfoIcon">
-      <property name="geometry">
-       <rect>
-        <x>150</x>
-        <y>160</y>
-        <width>21</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/ico_info.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="radioButtonUseLocalBluetoothAdapter">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>60</y>
-        <width>151</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Use local adapter</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelPairWarningIcon">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>206</y>
-        <width>31</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/ico_warning.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelPairWarning">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>210</y>
-        <width>501</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>In order to use bluetooth features please remember to pair your device.</string>
-      </property>
-     </widget>
-    </widget>
-   </widget>
   </widget>
   <widget class="QLabel" name="labelSettingsIcon">
    <property name="geometry">
@@ -1031,10 +899,6 @@ color: rgb(238, 238, 236);</string>
   <tabstop>pushButtonSelectAll</tabstop>
   <tabstop>pushButtonClearSelection</tabstop>
   <tabstop>pushButtonShowBindings</tabstop>
-  <tabstop>radioButtonDisableBluetooth</tabstop>
-  <tabstop>radioButtonUseLocalBluetoothAdapter</tabstop>
-  <tabstop>radioButtonUseExternalBluetoothAdapter</tabstop>
-  <tabstop>lineEditExternalBluetoothAdapterAddress</tabstop>
  </tabstops>
  <resources/>
  <connections/>
