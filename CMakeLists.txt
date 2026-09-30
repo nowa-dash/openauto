@@ -30,12 +30,11 @@ add_definitions(-DBOOST_ALL_DYN_LINK)
 find_package(Boost REQUIRED COMPONENTS system log OPTIONAL_COMPONENTS unit_test_framework)
 find_package(libusb-1.0 REQUIRED)
 find_package(Qt5 COMPONENTS Core Gui Widgets Multimedia Bluetooth REQUIRED)
-find_package(Protobuf REQUIRED)
-find_package(OpenSSL REQUIRED)
 find_package(rtaudio REQUIRED)
 find_package(absl REQUIRED)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(GST REQUIRED gstreamer-1.0 gstreamer-app-1.0)
+find_package(aasdk REQUIRED)
 
 if(WIN32)
     set(WINSOCK2_LIBRARIES "ws2_32")
@@ -58,11 +57,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR}
                     ${GST_INCLUDE_DIRS}
                     ${Boost_INCLUDE_DIRS}
                     ${LIBUSB_1_INCLUDE_DIRS}
-                    ${PROTOBUF_INCLUDE_DIR}
-                    ${OPENSSL_INCLUDE_DIR}
                     ${RTAUDIO_INCLUDE_DIRS}
-                    ${AASDK_PROTO_INCLUDE_DIRS}
-                    ${AASDK_INCLUDE_DIRS}
                     ${BCM_HOST_INCLUDE_DIRS}
                     ${ILCLIENT_INCLUDE_DIRS}
                     ${include_directory})
@@ -86,29 +81,13 @@ target_link_libraries(autoapp
                         ${Qt5Bluetooth_LIBRARIES}
                         ${GST_LIBRARIES}
                         ${LIBUSB_1_LIBRARIES}
-                        ${PROTOBUF_LIBRARIES}
                         ${BCM_HOST_LIBRARIES}
                         ${ILCLIENT_LIBRARIES}
                         ${WINSOCK2_LIBRARIES}
                         ${RTAUDIO_LIBRARIES}
-                        ${AASDK_PROTO_LIBRARIES}
-                        ${AASDK_LIBRARIES}
+                        aasdk::aasdk
                         absl::log_internal_check_op
                         absl::status
                         absl::strings)
-
-set(btservice_sources_directory ${sources_directory}/btservice)
-set(btservice_include_directory ${include_directory}/f1x/openauto/btservice)
-file(GLOB_RECURSE btservice_source_files ${btservice_sources_directory}/*.cpp ${btservice_include_directory}/*.hpp ${common_include_directory}/*.hpp)
-
-add_executable(btservice ${btservice_source_files})
-
-target_link_libraries(btservice
-                        ${Boost_LIBRARIES}
-                        ${Qt5Core_LIBRARIES}
-                        ${Qt5Widgets_LIBRARIES}
-                        ${Qt5Bluetooth_LIBRARIES}
-                        ${PROTOBUF_LIBRARIES}
-                        ${AASDK_PROTO_LIBRARIES})
 
 install(TARGETS autoapp RUNTIME DESTINATION bin)
