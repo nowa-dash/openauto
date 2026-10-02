@@ -161,7 +161,6 @@ void AndroidAutoEntity::onServiceDiscoveryRequest(const aasdk::proto::messages::
     serviceDiscoveryResponse.set_sw_build("1");
     serviceDiscoveryResponse.set_sw_version("1.0");
     serviceDiscoveryResponse.set_can_play_native_media_during_vr(false);
-    serviceDiscoveryResponse.set_hide_clock(!configuration_->showClock());
 
     std::for_each(serviceList_.begin(), serviceList_.end(), std::bind(&IService::fillFeatures, std::placeholders::_1, std::ref(serviceDiscoveryResponse)));
 

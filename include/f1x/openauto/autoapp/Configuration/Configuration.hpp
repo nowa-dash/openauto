@@ -35,8 +35,6 @@ public:
 
     void setHandednessOfTrafficType(HandednessOfTrafficType value) override;
     HandednessOfTrafficType getHandednessOfTrafficType() const override;
-    void showClock(bool value) override;
-    bool showClock() const override;
 
     aasdk::proto::enums::VideoFPS::Enum getVideoFPS() const override;
     void setVideoFPS(aasdk::proto::enums::VideoFPS::Enum value) override;
@@ -44,11 +42,6 @@ public:
     void setVideoResolution(aasdk::proto::enums::VideoResolution::Enum value) override;
     size_t getScreenDPI() const override;
     void setScreenDPI(size_t value) override;
-    void setOMXLayerIndex(int32_t value) override;
-    int32_t getOMXLayerIndex() const override;
-    void setVideoMargins(QRect value) override;
-    QRect getVideoMargins() const override;
-
     bool getTouchscreenEnabled() const override;
     void setTouchscreenEnabled(bool value) override;
     ButtonCodes getButtonCodes() const override;
@@ -58,8 +51,6 @@ public:
     void setMusicAudioChannelEnabled(bool value) override;
     bool speechAudioChannelEnabled() const override;
     void setSpeechAudioChannelEnabled(bool value) override;
-    AudioOutputBackendType getAudioOutputBackendType() const override;
-    void setAudioOutputBackendType(AudioOutputBackendType value) override;
 
 private:
     void readButtonCodes(boost::property_tree::ptree& iniConfig);
@@ -67,33 +58,24 @@ private:
     void writeButtonCodes(boost::property_tree::ptree& iniConfig);
 
     HandednessOfTrafficType handednessOfTrafficType_;
-    bool showClock_;
     aasdk::proto::enums::VideoFPS::Enum videoFPS_;
     aasdk::proto::enums::VideoResolution::Enum videoResolution_;
     size_t screenDPI_;
-    int32_t omxLayerIndex_;
-    QRect videoMargins_;
     bool enableTouchscreen_;
     ButtonCodes buttonCodes_;
     bool musicAudioChannelEnabled_;
     bool speechAudiochannelEnabled_;
-    AudioOutputBackendType audioOutputBackendType_;
 
     static const std::string cConfigFilePath;
 
-    static const std::string cGeneralShowClockKey;
     static const std::string cGeneralHandednessOfTrafficTypeKey;
 
     static const std::string cVideoFPSKey;
     static const std::string cVideoResolutionKey;
     static const std::string cVideoScreenDPIKey;
-    static const std::string cVideoOMXLayerIndexKey;
-    static const std::string cVideoMarginWidth;
-    static const std::string cVideoMarginHeight;
 
     static const std::string cAudioMusicAudioChannelEnabled;
     static const std::string cAudioSpeechAudioChannelEnabled;
-    static const std::string cAudioOutputBackendType;
 
 
     static const std::string cInputEnableTouchscreenKey;

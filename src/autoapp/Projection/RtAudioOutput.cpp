@@ -95,11 +95,6 @@ void RtAudioOutput::stop()
     }
 }
 
-void RtAudioOutput::suspend()
-{
-    //not needed
-}
-
 uint32_t RtAudioOutput::getSampleSize() const
 {
     return sampleSize_;

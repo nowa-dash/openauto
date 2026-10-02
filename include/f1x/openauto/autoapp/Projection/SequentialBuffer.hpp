@@ -29,7 +29,7 @@ namespace f1x::openauto::autoapp::projection
 class SequentialBuffer: public QIODevice
 {
 public:
-    SequentialBuffer();
+    explicit SequentialBuffer(size_t maxBufferedBytes = 0);
     bool isSequential() const override;
     qint64 size() const override;
     qint64 pos() const override;
@@ -46,6 +46,7 @@ protected:
 
 private:
     boost::circular_buffer<aasdk::common::Data::value_type> data_;
+    size_t maxBufferedBytes_;
     mutable std::mutex mutex_;
 };
 

@@ -46,7 +46,6 @@ SettingsWindow::~SettingsWindow()
 void SettingsWindow::onSave()
 {
     configuration_->setHandednessOfTrafficType(ui_->radioButtonLeftHandDrive->isChecked() ? configuration::HandednessOfTrafficType::LEFT_HAND_DRIVE : configuration::HandednessOfTrafficType::RIGHT_HAND_DRIVE);
-    configuration_->showClock(ui_->checkBoxShowClock->isChecked());
     configuration_->setVideoFPS(ui_->radioButton30FPS->isChecked() ? aasdk::proto::enums::VideoFPS::_30 : aasdk::proto::enums::VideoFPS::_60);
 
     if(ui_->radioButton480p->isChecked())
@@ -63,17 +62,12 @@ void SettingsWindow::onSave()
     }
 
     configuration_->setScreenDPI(static_cast<size_t>(ui_->horizontalSliderScreenDPI->value()));
-    configuration_->setOMXLayerIndex(ui_->spinBoxOmxLayerIndex->value());
-
-    QRect videoMargins(0, 0, ui_->spinBoxVideoMarginWidth->value(), ui_->spinBoxVideoMarginHeight->value());
-    configuration_->setVideoMargins(std::move(videoMargins));
 
     configuration_->setTouchscreenEnabled(ui_->checkBoxEnableTouchscreen->isChecked());
     this->saveButtonCheckBoxes();
 
     configuration_->setMusicAudioChannelEnabled(ui_->checkBoxMusicAudioChannel->isChecked());
     configuration_->setSpeechAudioChannelEnabled(ui_->checkBoxSpeechAudioChannel->isChecked());
-    configuration_->setAudioOutputBackendType(ui_->radioButtonRtAudio->isChecked() ? configuration::AudioOutputBackendType::RTAUDIO : configuration::AudioOutputBackendType::QT);
 
     configuration_->save();
     this->close();
@@ -100,8 +94,6 @@ void SettingsWindow::load()
 {
     ui_->radioButtonLeftHandDrive->setChecked(configuration_->getHandednessOfTrafficType() == configuration::HandednessOfTrafficType::LEFT_HAND_DRIVE);
     ui_->radioButtonRightHandDrive->setChecked(configuration_->getHandednessOfTrafficType() == configuration::HandednessOfTrafficType::RIGHT_HAND_DRIVE);
-    ui_->checkBoxShowClock->setChecked(configuration_->showClock());
-
     ui_->radioButton30FPS->setChecked(configuration_->getVideoFPS() == aasdk::proto::enums::VideoFPS::_30);
     ui_->radioButton60FPS->setChecked(configuration_->getVideoFPS() == aasdk::proto::enums::VideoFPS::_60);
 
@@ -109,21 +101,12 @@ void SettingsWindow::load()
     ui_->radioButton720p->setChecked(configuration_->getVideoResolution() == aasdk::proto::enums::VideoResolution::_720p);
     ui_->radioButton1080p->setChecked(configuration_->getVideoResolution() == aasdk::proto::enums::VideoResolution::_1080p);
     ui_->horizontalSliderScreenDPI->setValue(static_cast<int>(configuration_->getScreenDPI()));
-    ui_->spinBoxOmxLayerIndex->setValue(configuration_->getOMXLayerIndex());
-
-    const auto& videoMargins = configuration_->getVideoMargins();
-    ui_->spinBoxVideoMarginWidth->setValue(videoMargins.width());
-    ui_->spinBoxVideoMarginHeight->setValue(videoMargins.height());
 
     ui_->checkBoxEnableTouchscreen->setChecked(configuration_->getTouchscreenEnabled());
     this->loadButtonCheckBoxes();
 
     ui_->checkBoxMusicAudioChannel->setChecked(configuration_->musicAudioChannelEnabled());
     ui_->checkBoxSpeechAudioChannel->setChecked(configuration_->speechAudioChannelEnabled());
-
-    const auto& audioOutputBackendType = configuration_->getAudioOutputBackendType();
-    ui_->radioButtonRtAudio->setChecked(audioOutputBackendType == configuration::AudioOutputBackendType::RTAUDIO);
-    ui_->radioButtonQtAudio->setChecked(audioOutputBackendType == configuration::AudioOutputBackendType::QT);
 }
 
 void SettingsWindow::loadButtonCheckBoxes()

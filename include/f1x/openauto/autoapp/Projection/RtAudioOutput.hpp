@@ -33,7 +33,6 @@ public:
     void write(aasdk::messenger::Timestamp::ValueType timestamp, const aasdk::common::DataConstBuffer& buffer) override;
     void start() override;
     void stop() override;
-    void suspend() override;
     uint32_t getSampleSize() const override;
     uint32_t getChannelCount() const override;
     uint32_t getSampleRate() const override;

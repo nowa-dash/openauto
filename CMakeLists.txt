@@ -40,21 +40,11 @@ if(WIN32)
     set(WINSOCK2_LIBRARIES "ws2_32")
 endif(WIN32)
 
-if(RPI3_BUILD)
-    add_definitions(-DUSE_OMX -DOMX_SKIP64BIT -DRASPBERRYPI3)
-    set(BCM_HOST_LIBRARIES "/opt/vc/lib/libbcm_host.so")
-    set(BCM_HOST_INCLUDE_DIRS "/opt/vc/include")
-    set(ILCLIENT_INCLUDE_DIRS "/opt/vc/src/hello_pi/libs/ilclient")
-    set(ILCLIENT_LIBRARIES "/opt/vc/src/hello_pi/libs/ilclient/libilclient.a;/opt/vc/lib/libvcos.so;/opt/vc/lib/libvcilcs.a;/opt/vc/lib/libvchiq_arm.so")
-endif(RPI3_BUILD)
-
 include_directories(${CMAKE_CURRENT_BINARY_DIR}
                     ${GST_INCLUDE_DIRS}
                     ${Boost_INCLUDE_DIRS}
                     ${LIBUSB_1_INCLUDE_DIRS}
                     ${RTAUDIO_INCLUDE_DIRS}
-                    ${BCM_HOST_INCLUDE_DIRS}
-                    ${ILCLIENT_INCLUDE_DIRS}
                     ${include_directory})
 								
 link_directories(${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
@@ -75,8 +65,6 @@ target_link_libraries(autoapp
                         Qt6::Multimedia
                         ${GST_LIBRARIES}
                         ${LIBUSB_1_LIBRARIES}
-                        ${BCM_HOST_LIBRARIES}
-                        ${ILCLIENT_LIBRARIES}
                         ${WINSOCK2_LIBRARIES}
                         ${RTAUDIO_LIBRARIES}
                         aasdk::aasdk

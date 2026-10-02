@@ -30,9 +30,7 @@
 #include <f1x/openauto/autoapp/Service/SensorService.hpp>
 #include <f1x/openauto/autoapp/Service/InputService.hpp>
 #include <f1x/openauto/autoapp/Projection/QtVideoOutput.hpp>
-#include <f1x/openauto/autoapp/Projection/OMXVideoOutput.hpp>
 #include <f1x/openauto/autoapp/Projection/RtAudioOutput.hpp>
-#include <f1x/openauto/autoapp/Projection/QtAudioOutput.hpp>
 #include <f1x/openauto/autoapp/Projection/QtAudioInput.hpp>
 #include <f1x/openauto/autoapp/Projection/InputDevice.hpp>
 
@@ -62,11 +60,8 @@ ServiceList ServiceFactory::create(aasdk::messenger::IMessenger::Pointer messeng
 
 IService::Pointer ServiceFactory::createVideoService(aasdk::messenger::IMessenger::Pointer messenger)
 {
-#ifdef USE_OMX
-    auto videoOutput(std::make_shared<projection::OMXVideoOutput>(configuration_));
-#else
     projection::IVideoOutput::Pointer videoOutput(new projection::QtVideoOutput(configuration_), std::bind(&QObject::deleteLater, std::placeholders::_1));
-#endif
+
     return std::make_shared<VideoService>(ioService_, messenger, std::move(videoOutput));
 }
 
@@ -99,25 +94,19 @@ void ServiceFactory::createAudioServices(ServiceList& serviceList, aasdk::messen
 {
     if(configuration_->musicAudioChannelEnabled())
     {
-        auto mediaAudioOutput = configuration_->getAudioOutputBackendType() == configuration::AudioOutputBackendType::RTAUDIO ?
-                    std::make_shared<projection::RtAudioOutput>(2, 16, 48000) :
-                    projection::IAudioOutput::Pointer(new projection::QtAudioOutput(2, 16, 48000), std::bind(&QObject::deleteLater, std::placeholders::_1));
+        auto mediaAudioOutput = std::make_shared<projection::RtAudioOutput>(2, 16, 48000);
 
         serviceList.emplace_back(std::make_shared<MediaAudioService>(ioService_, messenger, std::move(mediaAudioOutput)));
     }
 
     if(configuration_->speechAudioChannelEnabled())
     {
-        auto speechAudioOutput = configuration_->getAudioOutputBackendType() == configuration::AudioOutputBackendType::RTAUDIO ?
-                    std::make_shared<projection::RtAudioOutput>(1, 16, 16000) :
-                    projection::IAudioOutput::Pointer(new projection::QtAudioOutput(1, 16, 16000), std::bind(&QObject::deleteLater, std::placeholders::_1));
+        auto speechAudioOutput = std::make_shared<projection::RtAudioOutput>(1, 16, 16000);
 
         serviceList.emplace_back(std::make_shared<SpeechAudioService>(ioService_, messenger, std::move(speechAudioOutput)));
     }
 
-    auto systemAudioOutput = configuration_->getAudioOutputBackendType() == configuration::AudioOutputBackendType::RTAUDIO ?
-                std::make_shared<projection::RtAudioOutput>(1, 16, 16000) :
-                projection::IAudioOutput::Pointer(new projection::QtAudioOutput(1, 16, 16000), std::bind(&QObject::deleteLater, std::placeholders::_1));
+    auto systemAudioOutput = std::make_shared<projection::RtAudioOutput>(1, 16, 16000);
 
     serviceList.emplace_back(std::make_shared<SystemAudioService>(ioService_, messenger, std::move(systemAudioOutput)));
 }

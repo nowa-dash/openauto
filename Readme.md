@@ -39,8 +39,7 @@ Copyrights (c) 2018 f1x.studio (Michal Szwaj)
  - [Qt libraries](https://www.qt.io/)
  - [CMake](https://cmake.org/)
  - [RtAudio](https://www.music.mcgill.ca/~gary/rtaudio/playback.html)
- - Broadcom ilclient from RaspberryPI 3 firmware
- - OpenMAX IL API
+ 
 
 ### Remarks
 **This software is not certified by Google Inc. It is created for R&D purposes and may not work as expected by the original authors. Do not use while driving. You use this software at your own risk.**

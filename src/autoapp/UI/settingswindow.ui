@@ -119,20 +119,7 @@ color: rgb(238, 238, 236);</string>
       </property>
      </widget>
     </widget>
-    <widget class="QCheckBox" name="checkBoxShowClock">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>110</y>
-       <width>111</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Show clock</string>
-     </property>
     </widget>
-   </widget>
    <widget class="QWidget" name="tabVideo">
     <attribute name="title">
      <string>Video</string>
@@ -260,125 +247,11 @@ color: rgb(238, 238, 236);</string>
       </property>
      </widget>
     </widget>
-    <widget class="QGroupBox" name="groupBoxOmxLayerIndex">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>230</y>
-       <width>621</width>
-       <height>121</height>
-      </rect>
-     </property>
-     <property name="title">
-      <string>Display</string>
-     </property>
-     <widget class="QLabel" name="labelOmxLayerIndex">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>40</y>
-        <width>91</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Layer index:</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelOmxLayerInfo_2">
-      <property name="geometry">
-       <rect>
-        <x>60</x>
-        <y>80</y>
-        <width>311</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt; font-style:italic;&quot;&gt;OMX Layer is used only in case of OMX video output.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelOmxLayerInfoIcon_2">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>80</y>
-        <width>21</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/ico_info.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-     <widget class="QSpinBox" name="spinBoxOmxLayerIndex">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>30</y>
-        <width>71</width>
-        <height>41</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelVideoMarginWidth">
-      <property name="geometry">
-       <rect>
-        <x>200</x>
-        <y>40</y>
-        <width>101</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Margin width:</string>
-      </property>
-     </widget>
-     <widget class="QSpinBox" name="spinBoxVideoMarginWidth">
-      <property name="geometry">
-       <rect>
-        <x>310</x>
-        <y>30</y>
-        <width>71</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="maximum">
-       <number>99999</number>
-      </property>
-     </widget>
-     <widget class="QLabel" name="labelVideoMarginHeight">
-      <property name="geometry">
-       <rect>
-        <x>410</x>
-        <y>40</y>
-        <width>111</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Margin height:</string>
-      </property>
-     </widget>
-     <widget class="QSpinBox" name="spinBoxVideoMarginHeight">
-      <property name="geometry">
-       <rect>
-        <x>520</x>
-        <y>30</y>
-        <width>71</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <property name="maximum">
-       <number>99999</number>
-      </property>
-     </widget>
-    </widget>
     <widget class="QGroupBox" name="groupBoxScreenDPI">
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>360</y>
+       <y>230</y>
        <width>621</width>
        <height>81</height>
       </rect>
@@ -486,46 +359,7 @@ color: rgb(238, 238, 236);</string>
       </property>
      </widget>
     </widget>
-    <widget class="QGroupBox" name="groupBoxAudioOutputBackend">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>130</y>
-       <width>621</width>
-       <height>61</height>
-      </rect>
-     </property>
-     <property name="title">
-      <string>Output backend</string>
-     </property>
-     <widget class="QRadioButton" name="radioButtonRtAudio">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>30</y>
-        <width>112</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>RT audio</string>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="radioButtonQtAudio">
-      <property name="geometry">
-       <rect>
-        <x>140</x>
-        <y>30</y>
-        <width>112</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Qt</string>
-      </property>
-     </widget>
     </widget>
-   </widget>
    <widget class="QWidget" name="tabInput">
     <attribute name="title">
      <string>Input</string>
@@ -864,20 +698,15 @@ color: rgb(238, 238, 236);</string>
   <tabstop>tabWidget</tabstop>
   <tabstop>radioButtonLeftHandDrive</tabstop>
   <tabstop>radioButtonRightHandDrive</tabstop>
-  <tabstop>checkBoxShowClock</tabstop>
   <tabstop>radioButton30FPS</tabstop>
   <tabstop>radioButton60FPS</tabstop>
   <tabstop>radioButton480p</tabstop>
   <tabstop>radioButton720p</tabstop>
   <tabstop>radioButton1080p</tabstop>
-  <tabstop>spinBoxOmxLayerIndex</tabstop>
-  <tabstop>spinBoxVideoMarginWidth</tabstop>
-  <tabstop>spinBoxVideoMarginHeight</tabstop>
   <tabstop>horizontalSliderScreenDPI</tabstop>
   <tabstop>checkBoxMusicAudioChannel</tabstop>
   <tabstop>checkBoxSpeechAudioChannel</tabstop>
-  <tabstop>radioButtonRtAudio</tabstop>
-  <tabstop>radioButtonQtAudio</tabstop>
+  
   <tabstop>checkBoxEnableTouchscreen</tabstop>
   <tabstop>listWidgetButtons</tabstop>
   <tabstop>checkBoxPlayButton</tabstop>

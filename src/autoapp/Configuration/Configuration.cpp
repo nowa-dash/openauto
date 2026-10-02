@@ -26,19 +26,14 @@ namespace f1x::openauto::autoapp::configuration
 
 const std::string Configuration::cConfigFilePath = (std::filesystem::path(QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation).toStdString()) / "openauto" / "openauto.ini").string();
 
-const std::string Configuration::cGeneralShowClockKey = "General.ShowClock";
 const std::string Configuration::cGeneralHandednessOfTrafficTypeKey = "General.HandednessOfTrafficType";
 
 const std::string Configuration::cVideoFPSKey = "Video.FPS";
 const std::string Configuration::cVideoResolutionKey = "Video.Resolution";
 const std::string Configuration::cVideoScreenDPIKey = "Video.ScreenDPI";
-const std::string Configuration::cVideoOMXLayerIndexKey = "Video.OMXLayerIndex";
-const std::string Configuration::cVideoMarginWidth = "Video.MarginWidth";
-const std::string Configuration::cVideoMarginHeight = "Video.MarginHeight";
 
 const std::string Configuration::cAudioMusicAudioChannelEnabled = "Audio.MusicAudioChannelEnabled";
 const std::string Configuration::cAudioSpeechAudioChannelEnabled = "Audio.SpeechAudioChannelEnabled";
-const std::string Configuration::cAudioOutputBackendType = "Audio.OutputBackendType";
 
 const std::string Configuration::cInputEnableTouchscreenKey = "Input.EnableTouchscreen";
 const std::string Configuration::cInputPlayButtonKey = "Input.PlayButton";
@@ -74,8 +69,6 @@ void Configuration::load()
 
         handednessOfTrafficType_ = static_cast<HandednessOfTrafficType>(iniConfig.get<uint32_t>(cGeneralHandednessOfTrafficTypeKey,
                                                                                                 static_cast<uint32_t>(HandednessOfTrafficType::LEFT_HAND_DRIVE)));
-        showClock_ = iniConfig.get<bool>(cGeneralShowClockKey, true);
-
         videoFPS_ = static_cast<aasdk::proto::enums::VideoFPS::Enum>(iniConfig.get<uint32_t>(cVideoFPSKey,
                                                                                              aasdk::proto::enums::VideoFPS::_60));
 
@@ -83,15 +76,11 @@ void Configuration::load()
                                                                                                            aasdk::proto::enums::VideoResolution::_480p));
         screenDPI_ = iniConfig.get<size_t>(cVideoScreenDPIKey, 140);
 
-        omxLayerIndex_ = iniConfig.get<int32_t>(cVideoOMXLayerIndexKey, 1);
-        videoMargins_ = QRect(0, 0, iniConfig.get<int32_t>(cVideoMarginWidth, 0), iniConfig.get<int32_t>(cVideoMarginHeight, 0));
-
         enableTouchscreen_ = iniConfig.get<bool>(cInputEnableTouchscreenKey, true);
         this->readButtonCodes(iniConfig);
 
         musicAudioChannelEnabled_ = iniConfig.get<bool>(cAudioMusicAudioChannelEnabled, true);
         speechAudiochannelEnabled_ = iniConfig.get<bool>(cAudioSpeechAudioChannelEnabled, true);
-        audioOutputBackendType_ = static_cast<AudioOutputBackendType>(iniConfig.get<uint32_t>(cAudioOutputBackendType, static_cast<uint32_t>(AudioOutputBackendType::RTAUDIO)));
     }
     catch(const boost::property_tree::ini_parser_error& e)
     {
@@ -105,38 +94,28 @@ void Configuration::load()
 void Configuration::reset()
 {
     handednessOfTrafficType_ = HandednessOfTrafficType::LEFT_HAND_DRIVE;
-    showClock_ = true;
     videoFPS_ = aasdk::proto::enums::VideoFPS::_60;
     videoResolution_ = aasdk::proto::enums::VideoResolution::_480p;
     screenDPI_ = 140;
-    omxLayerIndex_ = 1;
-    videoMargins_ = QRect(0, 0, 0, 0);
     enableTouchscreen_ = true;
     buttonCodes_.clear();
     musicAudioChannelEnabled_ = true;
     speechAudiochannelEnabled_ = true;
-    audioOutputBackendType_ = AudioOutputBackendType::RTAUDIO;
 }
 
 void Configuration::save()
 {
     boost::property_tree::ptree iniConfig;
     iniConfig.put<uint32_t>(cGeneralHandednessOfTrafficTypeKey, static_cast<uint32_t>(handednessOfTrafficType_));
-    iniConfig.put<bool>(cGeneralShowClockKey, showClock_);
-
     iniConfig.put<uint32_t>(cVideoFPSKey, static_cast<uint32_t>(videoFPS_));
     iniConfig.put<uint32_t>(cVideoResolutionKey, static_cast<uint32_t>(videoResolution_));
     iniConfig.put<size_t>(cVideoScreenDPIKey, screenDPI_);
-    iniConfig.put<int32_t>(cVideoOMXLayerIndexKey, omxLayerIndex_);
-    iniConfig.put<uint32_t>(cVideoMarginWidth, videoMargins_.width());
-    iniConfig.put<uint32_t>(cVideoMarginHeight, videoMargins_.height());
 
     iniConfig.put<bool>(cInputEnableTouchscreenKey, enableTouchscreen_);
     this->writeButtonCodes(iniConfig);
 
     iniConfig.put<bool>(cAudioMusicAudioChannelEnabled, musicAudioChannelEnabled_);
     iniConfig.put<bool>(cAudioSpeechAudioChannelEnabled, speechAudiochannelEnabled_);
-    iniConfig.put<uint32_t>(cAudioOutputBackendType, static_cast<uint32_t>(audioOutputBackendType_));
     boost::property_tree::ini_parser::write_ini(cConfigFilePath, iniConfig);
 }
 
@@ -150,15 +129,7 @@ HandednessOfTrafficType Configuration::getHandednessOfTrafficType() const
     return handednessOfTrafficType_;
 }
 
-void Configuration::showClock(bool value)
-{
-    showClock_ = value;
-}
 
-bool Configuration::showClock() const
-{
-    return showClock_;
-}
 
 aasdk::proto::enums::VideoFPS::Enum Configuration::getVideoFPS() const
 {
@@ -190,25 +161,6 @@ void Configuration::setScreenDPI(size_t value)
     screenDPI_ = value;
 }
 
-void Configuration::setOMXLayerIndex(int32_t value)
-{
-    omxLayerIndex_ = value;
-}
-
-int32_t Configuration::getOMXLayerIndex() const
-{
-    return omxLayerIndex_;
-}
-
-void Configuration::setVideoMargins(QRect value)
-{
-    videoMargins_ = value;
-}
-
-QRect Configuration::getVideoMargins() const
-{
-    return videoMargins_;
-}
 
 bool Configuration::getTouchscreenEnabled() const
 {
@@ -250,15 +202,7 @@ void Configuration::setSpeechAudioChannelEnabled(bool value)
     speechAudiochannelEnabled_ = value;
 }
 
-AudioOutputBackendType Configuration::getAudioOutputBackendType() const
-{
-    return audioOutputBackendType_;
-}
 
-void Configuration::setAudioOutputBackendType(AudioOutputBackendType value)
-{
-    audioOutputBackendType_ = value;
-}
 
 void Configuration::readButtonCodes(boost::property_tree::ptree& iniConfig)
 {

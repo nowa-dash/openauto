@@ -21,8 +21,9 @@
 namespace f1x::openauto::autoapp::projection
 {
 
-SequentialBuffer::SequentialBuffer()
+SequentialBuffer::SequentialBuffer(size_t maxBufferedBytes)
     : data_(aasdk::common::cStaticDataSize)
+    , maxBufferedBytes_(maxBufferedBytes)
 {
 }
 
@@ -59,6 +60,12 @@ qint64 SequentialBuffer::writeData(const char *data, qint64 len)
     std::lock_guard<decltype(mutex_)> lock(mutex_);
 
     data_.insert(data_.end(), data, data + len);
+
+    if(maxBufferedBytes_ != 0 && data_.size() > maxBufferedBytes_)
+    {
+        data_.erase_begin(data_.size() - maxBufferedBytes_);
+    }
+
     emit readyRead();
     return len;
 }
@@ -86,6 +93,8 @@ bool SequentialBuffer::atEnd() const
 
 bool SequentialBuffer::reset()
 {
+    std::lock_guard<decltype(mutex_)> lock(mutex_);
+
     data_.clear();
     return true;
 }
