@@ -17,6 +17,7 @@
 */
 
 #include <QApplication>
+#include <QMediaDevices>
 #include <f1x/openauto/autoapp/Projection/QtAudioOutput.hpp>
 #include <f1x/openauto/Common/Log.hpp>
 
@@ -28,10 +29,7 @@ QtAudioOutput::QtAudioOutput(uint32_t channelCount, uint32_t sampleSize, uint32_
 {
     audioFormat_.setChannelCount(channelCount);
     audioFormat_.setSampleRate(sampleRate);
-    audioFormat_.setSampleSize(sampleSize);
-    audioFormat_.setCodec("audio/pcm");
-    audioFormat_.setByteOrder(QAudioFormat::LittleEndian);
-    audioFormat_.setSampleType(QAudioFormat::SignedInt);
+    audioFormat_.setSampleFormat(QAudioFormat::Int16);
 
     this->moveToThread(QApplication::instance()->thread());
     connect(this, &QtAudioOutput::startPlayback, this, &QtAudioOutput::onStartPlayback);
@@ -44,7 +42,7 @@ QtAudioOutput::QtAudioOutput(uint32_t channelCount, uint32_t sampleSize, uint32_
 void QtAudioOutput::createAudioOutput()
 {
     OPENAUTO_LOG(debug) << "[QtAudioOutput] create.";
-    audioOutput_ = std::make_unique<QAudioOutput>(QAudioDeviceInfo::defaultOutputDevice(), audioFormat_);
+    audioOutput_ = std::make_unique<QAudioSink>(QMediaDevices::defaultAudioOutput(), audioFormat_);
 }
 
 bool QtAudioOutput::open()
@@ -74,7 +72,7 @@ void QtAudioOutput::suspend()
 
 uint32_t QtAudioOutput::getSampleSize() const
 {
-    return audioFormat_.sampleSize();
+    return audioFormat_.bytesPerSample() * 8;
 }
 
 uint32_t QtAudioOutput::getChannelCount() const

@@ -29,7 +29,7 @@ add_definitions(-DBOOST_ALL_DYN_LINK)
 
 find_package(Boost REQUIRED COMPONENTS system log OPTIONAL_COMPONENTS unit_test_framework)
 find_package(libusb-1.0 REQUIRED)
-find_package(Qt5 COMPONENTS Core Gui Widgets Multimedia REQUIRED)
+find_package(Qt6 COMPONENTS Core Gui Widgets Multimedia REQUIRED)
 find_package(rtaudio REQUIRED)
 find_package(absl REQUIRED)
 find_package(PkgConfig REQUIRED)
@@ -49,10 +49,6 @@ if(RPI3_BUILD)
 endif(RPI3_BUILD)
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR}
-                    ${Qt5Core_INCLUDE_DIRS}
-                    ${Qt5Gui_INCLUDE_DIRS}
-                    ${Qt5Widgets_INCLUDE_DIRS}
-                    ${Qt5Multimedia_INCLUDE_DIRS}
                     ${GST_INCLUDE_DIRS}
                     ${Boost_INCLUDE_DIRS}
                     ${LIBUSB_1_INCLUDE_DIRS}
@@ -73,10 +69,10 @@ add_executable(autoapp ${autoapp_source_files})
 
 target_link_libraries(autoapp
                         ${Boost_LIBRARIES}
-                        ${Qt5Core_LIBRARIES}
-                        ${Qt5Gui_LIBRARIES}
-                        ${Qt5Widgets_LIBRARIES}
-                        ${Qt5Multimedia_LIBRARIES}
+                        Qt6::Core
+                        Qt6::Gui
+                        Qt6::Widgets
+                        Qt6::Multimedia
                         ${GST_LIBRARIES}
                         ${LIBUSB_1_LIBRARIES}
                         ${BCM_HOST_LIBRARIES}

@@ -17,6 +17,7 @@
 */
 
 #include <QApplication>
+#include <QMediaDevices>
 #include <f1x/openauto/autoapp/Projection/QtAudioInput.hpp>
 #include <f1x/openauto/Common/Log.hpp>
 
@@ -30,10 +31,7 @@ QtAudioInput::QtAudioInput(uint32_t channelCount, uint32_t sampleSize, uint32_t 
 
     audioFormat_.setChannelCount(channelCount);
     audioFormat_.setSampleRate(sampleRate);
-    audioFormat_.setSampleSize(sampleSize);
-    audioFormat_.setCodec("audio/pcm");
-    audioFormat_.setByteOrder(QAudioFormat::LittleEndian);
-    audioFormat_.setSampleType(QAudioFormat::SignedInt);
+    audioFormat_.setSampleFormat(QAudioFormat::Int16);
 
     this->moveToThread(QApplication::instance()->thread());
     connect(this, &QtAudioInput::startRecording, this, &QtAudioInput::onStartRecording, Qt::QueuedConnection);
@@ -44,7 +42,7 @@ QtAudioInput::QtAudioInput(uint32_t channelCount, uint32_t sampleSize, uint32_t 
 void QtAudioInput::createAudioInput()
 {
     OPENAUTO_LOG(debug) << "[AudioInput] create.";
-    audioInput_ = (std::make_unique<QAudioInput>(QAudioDeviceInfo::defaultInputDevice(), audioFormat_));
+    audioSource_ = std::make_unique<QAudioSource>(QMediaDevices::defaultAudioInput(), audioFormat_);
 }
 
 bool QtAudioInput::open()
@@ -91,7 +89,7 @@ void QtAudioInput::stop()
 
 uint32_t QtAudioInput::getSampleSize() const
 {
-    return audioFormat_.sampleSize();
+    return audioFormat_.bytesPerSample() * 8;
 }
 
 uint32_t QtAudioInput::getChannelCount() const
@@ -108,7 +106,7 @@ void QtAudioInput::onStartRecording(StartPromise::Pointer promise)
 {
     std::lock_guard<decltype(mutex_)> lock(mutex_);
 
-    ioDevice_ = audioInput_->start();
+    ioDevice_ = audioSource_->start();
 
     if(ioDevice_ != nullptr)
     {
@@ -138,7 +136,7 @@ void QtAudioInput::onStopRecording()
         ioDevice_ = nullptr;
     }
 
-    audioInput_->stop();
+    audioSource_->stop();
 }
 
 void QtAudioInput::onReadyRead()
