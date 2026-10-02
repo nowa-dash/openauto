@@ -40,7 +40,7 @@ private:
     size_t maxListSize_;
     RecentAddresses list_;
 
-    static const std::string cConfigFileName;
+    static const std::string cConfigFilePath;
     static const std::string cRecentEntiresCount;
     static const std::string cRecentEntryPrefix;
 };

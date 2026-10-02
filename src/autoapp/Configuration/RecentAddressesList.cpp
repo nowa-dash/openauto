@@ -16,6 +16,8 @@
 *  along with openauto. If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <filesystem>
+#include <QStandardPaths>
 #include <boost/property_tree/ini_parser.hpp>
 #include <f1x/openauto/Common/Log.hpp>
 #include <f1x/openauto/autoapp/Configuration/RecentAddressesList.hpp>
@@ -23,7 +25,7 @@
 namespace f1x::openauto::autoapp::configuration
 {
 
-const std::string RecentAddressesList::cConfigFileName = "openauto_wifi_recent.ini";
+const std::string RecentAddressesList::cConfigFilePath = (std::filesystem::path(QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation).toStdString()) / "openauto" / "openauto_wifi_recent.ini").string();
 const std::string RecentAddressesList::cRecentEntiresCount = "Recent.EntiresCount";
 const std::string RecentAddressesList::cRecentEntryPrefix = "Recent.Entry_";
 
@@ -65,7 +67,7 @@ void RecentAddressesList::load()
 
     try
     {
-        boost::property_tree::ini_parser::read_ini(cConfigFileName, iniConfig);
+        boost::property_tree::ini_parser::read_ini(cConfigFilePath, iniConfig);
 
         const auto listSize = std::min(maxListSize_, iniConfig.get<size_t>(cRecentEntiresCount, 0));
 
@@ -82,7 +84,7 @@ void RecentAddressesList::load()
     }
     catch(const boost::property_tree::ini_parser_error& e)
     {
-        OPENAUTO_LOG(warning) << "[RecentAddressesList] failed to read configuration file: " << cConfigFileName
+        OPENAUTO_LOG(warning) << "[RecentAddressesList] failed to read configuration file: " << cConfigFilePath
                             << ", error: " << e.what()
                             << ". Empty list will be used.";
     }
@@ -101,7 +103,8 @@ void RecentAddressesList::save()
         iniConfig.put<RecentAddresses::value_type>(key, list_.at(i));
     }
 
-    boost::property_tree::ini_parser::write_ini(cConfigFileName, iniConfig);
+    std::filesystem::create_directories(std::filesystem::path(cConfigFilePath).parent_path());
+    boost::property_tree::ini_parser::write_ini(cConfigFilePath, iniConfig);
 }
 
 }

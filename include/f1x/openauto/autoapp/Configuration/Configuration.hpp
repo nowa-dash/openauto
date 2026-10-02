@@ -79,7 +79,7 @@ private:
     bool speechAudiochannelEnabled_;
     AudioOutputBackendType audioOutputBackendType_;
 
-    static const std::string cConfigFileName;
+    static const std::string cConfigFilePath;
 
     static const std::string cGeneralShowClockKey;
     static const std::string cGeneralHandednessOfTrafficTypeKey;

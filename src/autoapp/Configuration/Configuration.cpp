@@ -16,13 +16,15 @@
 *  along with openauto. If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <filesystem>
+#include <QStandardPaths>
 #include <f1x/openauto/autoapp/Configuration/Configuration.hpp>
 #include <f1x/openauto/Common/Log.hpp>
 
 namespace f1x::openauto::autoapp::configuration
 {
 
-const std::string Configuration::cConfigFileName = "openauto.ini";
+const std::string Configuration::cConfigFilePath = (std::filesystem::path(QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation).toStdString()) / "openauto" / "openauto.ini").string();
 
 const std::string Configuration::cGeneralShowClockKey = "General.ShowClock";
 const std::string Configuration::cGeneralHandednessOfTrafficTypeKey = "General.HandednessOfTrafficType";
@@ -58,6 +60,7 @@ const std::string Configuration::cInputEnterButtonKey = "Input.EnterButton";
 
 Configuration::Configuration()
 {
+    std::filesystem::create_directories(std::filesystem::path(cConfigFilePath).parent_path());
     this->load();
 }
 
@@ -67,7 +70,7 @@ void Configuration::load()
 
     try
     {
-        boost::property_tree::ini_parser::read_ini(cConfigFileName, iniConfig);
+        boost::property_tree::ini_parser::read_ini(cConfigFilePath, iniConfig);
 
         handednessOfTrafficType_ = static_cast<HandednessOfTrafficType>(iniConfig.get<uint32_t>(cGeneralHandednessOfTrafficTypeKey,
                                                                                                 static_cast<uint32_t>(HandednessOfTrafficType::LEFT_HAND_DRIVE)));
@@ -92,7 +95,7 @@ void Configuration::load()
     }
     catch(const boost::property_tree::ini_parser_error& e)
     {
-        OPENAUTO_LOG(warning) << "[Configuration] failed to read configuration file: " << cConfigFileName
+        OPENAUTO_LOG(warning) << "[Configuration] failed to read configuration file: " << cConfigFilePath
                             << ", error: " << e.what()
                             << ". Using default configuration.";
         this->reset();
@@ -134,7 +137,7 @@ void Configuration::save()
     iniConfig.put<bool>(cAudioMusicAudioChannelEnabled, musicAudioChannelEnabled_);
     iniConfig.put<bool>(cAudioSpeechAudioChannelEnabled, speechAudiochannelEnabled_);
     iniConfig.put<uint32_t>(cAudioOutputBackendType, static_cast<uint32_t>(audioOutputBackendType_));
-    boost::property_tree::ini_parser::write_ini(cConfigFileName, iniConfig);
+    boost::property_tree::ini_parser::write_ini(cConfigFilePath, iniConfig);
 }
 
 void Configuration::setHandednessOfTrafficType(HandednessOfTrafficType value)
