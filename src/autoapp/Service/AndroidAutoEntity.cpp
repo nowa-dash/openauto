@@ -149,6 +149,7 @@ void AndroidAutoEntity::onServiceDiscoveryRequest(const aasdk::proto::messages::
     OPENAUTO_LOG(info) << "[AndroidAutoEntity] Discovery request, device name: " << request.device_name()
                        << ", brand: " << request.device_brand();
 
+    // TODO: Make these configurable in a settings menu.
     aasdk::proto::messages::ServiceDiscoveryResponse serviceDiscoveryResponse;
     serviceDiscoveryResponse.mutable_channels()->Reserve(256);
     serviceDiscoveryResponse.set_head_unit_name("OpenAuto");
