@@ -21,13 +21,15 @@
 #include <f1x/openauto/autoapp/Service/IServiceFactory.hpp>
 #include <f1x/openauto/autoapp/Configuration/IConfiguration.hpp>
 
+class QWidget;
+
 namespace f1x::openauto::autoapp::service
 {
 
 class ServiceFactory: public IServiceFactory
 {
 public:
-    ServiceFactory(boost::asio::io_context& ioService, configuration::IConfiguration::Pointer configuration);
+    ServiceFactory(boost::asio::io_context& ioService, configuration::IConfiguration::Pointer configuration, QWidget* activeArea);
     ServiceList create(aasdk::messenger::IMessenger::Pointer messenger) override;
 
 private:
@@ -37,6 +39,7 @@ private:
 
     boost::asio::io_context& ioService_;
     configuration::IConfiguration::Pointer configuration_;
+    QWidget* activeArea_;
 };
 
 }

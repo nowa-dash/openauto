@@ -37,9 +37,10 @@
 namespace f1x::openauto::autoapp::service
 {
 
-ServiceFactory::ServiceFactory(boost::asio::io_context& ioService, configuration::IConfiguration::Pointer configuration)
+ServiceFactory::ServiceFactory(boost::asio::io_context& ioService, configuration::IConfiguration::Pointer configuration, QWidget* activeArea)
     : ioService_(ioService)
     , configuration_(std::move(configuration))
+    , activeArea_(activeArea)
 {
 
 }
@@ -60,7 +61,7 @@ ServiceList ServiceFactory::create(aasdk::messenger::IMessenger::Pointer messeng
 
 IService::Pointer ServiceFactory::createVideoService(aasdk::messenger::IMessenger::Pointer messenger)
 {
-    projection::IVideoOutput::Pointer videoOutput(new projection::QtVideoOutput(configuration_), std::bind(&QObject::deleteLater, std::placeholders::_1));
+    projection::IVideoOutput::Pointer videoOutput(new projection::QtVideoOutput(configuration_, activeArea_), std::bind(&QObject::deleteLater, std::placeholders::_1));
 
     return std::make_shared<VideoService>(ioService_, messenger, std::move(videoOutput));
 }

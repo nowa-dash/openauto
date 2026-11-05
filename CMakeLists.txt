@@ -33,7 +33,7 @@ find_package(Qt6 COMPONENTS Core Gui Widgets Multimedia REQUIRED)
 find_package(rtaudio REQUIRED)
 find_package(absl REQUIRED)
 find_package(PkgConfig REQUIRED)
-pkg_check_modules(GST REQUIRED gstreamer-1.0 gstreamer-app-1.0)
+pkg_check_modules(GST REQUIRED gstreamer-1.0 gstreamer-app-1.0 gstreamer-video-1.0 gstreamer-wayland-1.0)
 find_package(aasdk REQUIRED)
 
 if(WIN32)

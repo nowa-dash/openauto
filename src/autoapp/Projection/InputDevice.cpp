@@ -16,6 +16,8 @@
 *  along with openauto. If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <algorithm>
+#include <QWidget>
 #include <f1x/openauto/Common/Log.hpp>
 #include <f1x/openauto/autoapp/Projection/IInputDeviceEventHandler.hpp>
 #include <f1x/openauto/autoapp/Projection/InputDevice.hpp>
@@ -67,7 +69,32 @@ bool InputDevice::eventFilter(QObject* obj, QEvent* event)
         }
         else if(event->type() == QEvent::MouseButtonPress || event->type() == QEvent::MouseButtonRelease || event->type() == QEvent::MouseMove)
         {
-            return this->handleTouchEvent(event);
+            QWidget* target = qobject_cast<QWidget*>(obj);
+
+            if(target != nullptr)
+            {
+                QWidget* window = target->window();
+                QMouseEvent* mouse = static_cast<QMouseEvent*>(event);
+                const QPoint position = window->mapFromGlobal(mouse->globalPosition().toPoint());
+
+                const QSize videoSize = displayGeometry_.size().scaled(window->size(), Qt::KeepAspectRatio);
+                const QRect videoRect((window->width() - videoSize.width()) / 2, (window->height() - videoSize.height()) / 2, videoSize.width(), videoSize.height());
+
+                if(event->type() == QEvent::MouseButtonPress)
+                {
+                    mouseActive_ = videoRect.contains(position);
+                }
+
+                if(mouseActive_)
+                {
+                    if(event->type() == QEvent::MouseButtonRelease)
+                    {
+                        mouseActive_ = false;
+                    }
+
+                    return this->handleMouseEvent(mouse, position, videoRect);
+                }
+            }
         }
     }
 
@@ -174,16 +201,16 @@ bool InputDevice::handleKeyEvent(QEvent* event, QKeyEvent* key)
     return true;
 }
 
-bool InputDevice::handleTouchEvent(QEvent* event)
+bool InputDevice::handleMouseEvent(QMouseEvent* mouse, const QPoint& position, const QRect& videoRect)
 {
-    if(!configuration_->getTouchscreenEnabled())
+    if(!configuration_->getTouchscreenEnabled() || videoRect.isEmpty())
     {
         return true;
     }
 
     aasdk::proto::enums::TouchAction::Enum type;
 
-    switch(event->type())
+    switch(mouse->type())
     {
     case QEvent::MouseButtonPress:
         type = aasdk::proto::enums::TouchAction::PRESS;
@@ -196,16 +223,20 @@ bool InputDevice::handleTouchEvent(QEvent* event)
         break;
     default:
         return true;
-    };
-
-    QMouseEvent* mouse = static_cast<QMouseEvent*>(event);
-    if(event->type() == QEvent::MouseButtonRelease || mouse->buttons().testFlag(Qt::LeftButton))
-    {
-        const uint32_t x = (static_cast<float>(mouse->pos().x()) / touchscreenGeometry_.width()) * displayGeometry_.width();
-        const uint32_t y = (static_cast<float>(mouse->pos().y()) / touchscreenGeometry_.height()) * displayGeometry_.height();
-        eventHandler_->onTouchEvent({type, x, y, 0});
     }
 
+    // Map the position inside the letterboxed video onto the video resolution.
+    const double relativeX = std::clamp((position.x() - videoRect.x()) / static_cast<double>(videoRect.width()),
+                                        0.0, 1.0);
+    const double relativeY = std::clamp((position.y() - videoRect.y()) / static_cast<double>(videoRect.height()),
+                                        0.0, 1.0);
+
+    const uint32_t x = std::clamp(static_cast<uint32_t>(relativeX * displayGeometry_.width()),
+                                  0u, static_cast<uint32_t>(displayGeometry_.width() - 1));
+    const uint32_t y = std::clamp(static_cast<uint32_t>(relativeY * displayGeometry_.height()),
+                                  0u, static_cast<uint32_t>(displayGeometry_.height() - 1));
+
+    eventHandler_->onTouchEvent({type, x, y, 0});
     return true;
 }
 
@@ -216,7 +247,7 @@ bool InputDevice::hasTouchscreen() const
 
 QRect InputDevice::getTouchscreenGeometry() const
 {
-    return touchscreenGeometry_;
+    return displayGeometry_;
 }
 
 IInputDevice::ButtonCodes InputDevice::getSupportedButtonCodes() const

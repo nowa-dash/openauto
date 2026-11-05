@@ -25,6 +25,8 @@
 
 #include <f1x/openauto/autoapp/Projection/VideoOutput.hpp>
 
+class QWidget;
+
 namespace f1x::openauto::autoapp::projection
 {
 
@@ -33,7 +35,7 @@ class QtVideoOutput: public QObject, public VideoOutput, boost::noncopyable
     Q_OBJECT
 
 public:
-    QtVideoOutput(configuration::IConfiguration::Pointer configuration);
+    QtVideoOutput(configuration::IConfiguration::Pointer configuration, QWidget* videoArea);
     bool open() override;
     bool init() override;
     void write(uint64_t timestamp, const aasdk::common::DataConstBuffer& buffer) override;
@@ -48,10 +50,13 @@ protected slots:
     void onStopPlayback();
 
 private:
+    void attachVideoWindow();
+
     // Guards appsrc_/pipeline_ against concurrent access from the asio thread (write) and the Qt thread
     std::mutex gstMutex_;
     GstElement* pipeline_ = nullptr;
     GstElement* appsrc_ = nullptr;
+    QWidget* videoArea_;
 };
 
 }

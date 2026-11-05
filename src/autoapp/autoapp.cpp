@@ -107,7 +107,7 @@ int main(int argc, char* argv[])
     aasdk::usb::USBWrapper usbWrapper(usbContext);
     aasdk::usb::AccessoryModeQueryFactory queryFactory(usbWrapper, ioService);
     aasdk::usb::AccessoryModeQueryChainFactory queryChainFactory(usbWrapper, ioService, queryFactory);
-    autoapp::service::ServiceFactory serviceFactory(ioService, configuration);
+    autoapp::service::ServiceFactory serviceFactory(ioService, configuration, &mainWindow);
     autoapp::service::AndroidAutoEntityFactory androidAutoEntityFactory(ioService, configuration, serviceFactory);
 
     auto usbHub(std::make_shared<aasdk::usb::USBHub>(usbWrapper, ioService, queryChainFactory));

@@ -17,7 +17,12 @@
 */
 
 #include <QApplication>
+#include <QWidget>
+#include <QtGui/qguiapplication_platform.h>
 #include <gst/app/gstappsrc.h>
+#include <gst/video/videooverlay.h>
+#define GST_USE_UNSTABLE_API
+#include <gst/wayland/wayland.h>
 #include <cstring>
 #include <string>
 #include <f1x/openauto/autoapp/Projection/QtVideoOutput.hpp>
@@ -66,7 +71,7 @@ std::string buildPipelineDescription(const PipelineCandidate& candidate)
         description += candidate.tail;
     }
 
-    description += " ! waylandsink sync=false";
+    description += " ! waylandsink name=videosink sync=false";
     return description;
 }
 
@@ -95,8 +100,9 @@ GstBusSyncReply onBusMessage(GstBus*, GstMessage* message, gpointer)
 
 }
 
-QtVideoOutput::QtVideoOutput(configuration::IConfiguration::Pointer configuration)
+QtVideoOutput::QtVideoOutput(configuration::IConfiguration::Pointer configuration, QWidget* videoArea)
     : VideoOutput(std::move(configuration))
+    , videoArea_(videoArea)
 {
     this->moveToThread(QApplication::instance()->thread());
     connect(this, &QtVideoOutput::startPlayback, this, &QtVideoOutput::onStartPlayback, Qt::QueuedConnection);
@@ -142,6 +148,20 @@ void QtVideoOutput::write(uint64_t, const aasdk::common::DataConstBuffer& buffer
     gst_buffer_unmap(gstBuf, &map);
 
     gst_app_src_push_buffer(GST_APP_SRC(appsrc_), gstBuf);
+}
+
+void QtVideoOutput::attachVideoWindow()
+{
+    auto* wayland = qApp->nativeInterface<QNativeInterface::QWaylandApplication>();
+    GstElement* sink = gst_bin_get_by_name(GST_BIN(pipeline_), "videosink");
+
+    GstContext* context = gst_wl_display_handle_context_new(wayland->display());
+    gst_element_set_context(pipeline_, context);
+    gst_context_unref(context);
+
+    gst_video_overlay_set_window_handle(GST_VIDEO_OVERLAY(sink), videoArea_->winId());
+    gst_video_overlay_set_render_rectangle(GST_VIDEO_OVERLAY(sink), 0, 0, videoArea_->width(), videoArea_->height());
+    gst_object_unref(sink);
 }
 
 void QtVideoOutput::onStartPlayback()
@@ -202,6 +222,8 @@ void QtVideoOutput::onStartPlayback()
     GstBus* bus = gst_element_get_bus(pipeline_);
     gst_bus_set_sync_handler(bus, onBusMessage, nullptr, nullptr);
     gst_object_unref(bus);
+
+    this->attachVideoWindow();
 
     gst_element_set_state(pipeline_, GST_STATE_PLAYING);
 }

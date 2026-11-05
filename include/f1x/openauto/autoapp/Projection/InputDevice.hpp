@@ -46,7 +46,7 @@ private:
     void setVideoGeometry();
     bool handleKeyEvent(QEvent* event, QKeyEvent* key);
     void dispatchKeyEvent(ButtonEvent event);
-    bool handleTouchEvent(QEvent* event);
+    bool handleMouseEvent(QMouseEvent* event, const QPoint& position, const QRect& videoRect);
 
     QObject& parent_;
     configuration::IConfiguration::Pointer configuration_;
@@ -54,6 +54,7 @@ private:
     QRect displayGeometry_;
     IInputDeviceEventHandler* eventHandler_;
     std::mutex mutex_;
+    bool mouseActive_ = false;
 };
 
 }
